@@ -27,13 +27,14 @@ if(isset($_POST['update']))
 <?php
 $penalty_id = $_GET['penalty_id'];
 
-$result = mysqli_query($db, "SELECT * FROM penalty WHERE penalty_id=$penalty_id");
+$result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools,penalties WHERE penalty.borrower=borrower.stud_id AND penalty.tools=tools.tool_id AND penalty.penalty=penalties.pen_id AND penalty_id=$penalty_id");
 
 while($res = mysqli_fetch_array($result)) {
-	$borrower = $res['borrower'];
-	$tools = $res['tools'];
+	$borrower = $res['lastname'];
+	$borrower1 = $res['firstname'];
+	$tools = $res['toolname'];
 	$qy = $res['qy'];
-	$penalty = $res['penalty'];
+	$penalty = $res['pen_name'];
 	$timecharge = $res['timecharge'];
 	}
 ?>
@@ -64,27 +65,29 @@ while($res = mysqli_fetch_array($result)) {
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto" >
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active" style="color: white;>
+						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="home.php" style="color: white;">Home</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="tools.php" style="color: white;">Tools</a>
+						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools">Tools</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="view.php" style="color: white;">Borrowers</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="students/instructor">Borrowers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="borrowerview.php" style="color: white;">Borrow</a>
+						<a class="nav-link" href="borrowerview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="transaction">Borrow</a>
+					</li>
+										<li class="nav-item">
+						<a class="nav-link" href="penaltyview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="charged"><b>| Penalty |</b></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="penaltyview.php" style="color: white;"><b>| Penalty |</b></a>
+						<a class="nav-link" href="records.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="records" >Records</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="records.php" style="color: white;">Records</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="termsconditions.php" style="color: white;">Terms & Conditions</a>
+						<a class="nav-link" href="termsconditions.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="terms">Terms & Conditions</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">		
@@ -126,7 +129,7 @@ while($res = mysqli_fetch_array($result)) {
 			<div class="form-group row">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">Student / Instructor</label>
 					<div class="col-sm-5">
-						<input type="text" name="borrower" value="<?php echo $borrower;?>" class="form-control" id="colFormLabel">
+						<input type="text" name="borrower" value="<?php echo $borrower;?>, <?php echo $borrower1;?>" class="form-control" id="colFormLabel">
 					</div>
 			</div>
 			<div class="form-group row">

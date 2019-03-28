@@ -12,6 +12,7 @@ include_once("connection.php");
 
 if(isset($_POST['update'])) {	
 	$stud_id = $_POST['stud_id'];
+	
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
 	$position = $_POST['position'];
@@ -21,7 +22,7 @@ if(isset($_POST['update'])) {
 	$email = $_POST['email'];
 	$address = $_POST['address'];
 	
-	$result = mysqli_query($db, "UPDATE `borrower` SET `stud_id` = '$stud_id', `firstname` = '$firstname', `lastname` = '$lastname',  `position` = '$position',  `section` = '$section', `department` = '$department', `phone_number` = '$phone_number', `email` = '$email', `address` = '$address' WHERE `borrower`.`stud_id` = $stud_id;");
+	$result = mysqli_query($db, "UPDATE `borrower` SET `stud_id` = '$stud_id', `firstname` = '$firstname', `lastname` = '$lastname',  `position` = '$position',  `section` = '$section', `department` = '$department', `phone_number` = '$phone_number', `email` = '$email', `address` = '$address' WHERE stud_id=$stud_id");
 
 		header("Location: view.php");
 }
@@ -29,16 +30,16 @@ if(isset($_POST['update'])) {
 <?php
 $stud_id = $_GET['stud_id'];
 
-$result = mysqli_query($db, "SELECT * FROM borrower WHERE stud_id= ".$stud_id);
+$result = mysqli_query($db, "SELECT * FROM borrower, position, section, department WHERE borrower.position=position.pos_id AND borrower.section=section.sec_id AND borrower.department=department.dept_id AND borrower.stud_id=$stud_id");
 
 while($res = mysqli_fetch_array($result)) {
 	
 	$stud_id = $res['stud_id'];
 	$firstname = $res['firstname'];
 	$lastname = $res['lastname'];
-	$position = $res['position'];
-	$section = $res['section'];
-	$department = $res['department'];
+	$position = $res['pos_name'];
+	$section = $res['sec_name'];
+	$department = $res['dept_name'];
 	$phone_number = $res['phone_number'];
 	$email = $res['email'];
 	$address = $res['address'];
@@ -75,25 +76,25 @@ while($res = mysqli_fetch_array($result)) {
 					<li class="nav-item active" style="color: white;>
 						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="home.php" style="color: white;">Home</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="tools.php" style="color: white;">Tools</a>
+						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools">Tools</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="view.php" style="color: white;"><b>| Borrowers |</b></a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="students/instructor"><b>| Borrowers |</b></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="borrow.php" style="color: white;">Borrow</a>
+						<a class="nav-link" href="borrowerview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="transaction">Borrow</a>
+					</li>
+										<li class="nav-item">
+						<a class="nav-link" href="penaltyview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="charged">Penalty</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="penaltyview.php" style="color: white;">Penalty</a>
+						<a class="nav-link" href="records.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="records" >Records</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="records.php" style="color: white;">Records</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="termsconditions.php" style="color: white;">Terms & Conditions</a>
+						<a class="nav-link" href="termsconditions.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="terms">Terms & Conditions</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">		
@@ -148,7 +149,7 @@ while($res = mysqli_fetch_array($result)) {
 			<label for="colFormLabel" class="col-sm-2 col-form-label">position</label>
 				<div class="col-sm-5">
 						<select name= "position" class="form-control" id="colFormLabel"required>
-							<option value="<?php echo $position ?>"><?php echo $position ?></option>
+							<option value="<?php echo $position ?>"><?php  echo $position ?></option>
 							<?php
 							$position= "SELECT * FROM position";
 							$position= mysqli_query($db, $position);

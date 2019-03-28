@@ -9,7 +9,7 @@ if(!isset($_SESSION['valid'])) {
 <?php	
 include_once("connection.php");
 
-$result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools WHERE penalty.borrower=borrower.stud_id AND penalty.tools = tools.tool_id ORDER BY penalty_id DESC");
+$result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools,penalties WHERE penalty.borrower=borrower.stud_id AND penalty.tools = tools.tool_id AND penalty.penalty=penalties.pen_id");
 ?>
 
 <!DOCTYPE html>
@@ -39,27 +39,29 @@ $result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools WHERE penalty.
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto" >
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active" style="color: white;>
+						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="home.php" style="color: white;">Home</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="tools.php" style="color: white;">Tools</a>
+						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools">Tools</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="view.php" style="color: white;">Borrowers</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="students/instructor">Borrowers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="borrowerview.php" style="color: white;">Borrow</a>
+						<a class="nav-link" href="borrowerview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="transaction">Borrow</a>
+					</li>
+										<li class="nav-item">
+						<a class="nav-link" href="penaltyview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="charged"><b>| Penalty |</b></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="penaltyview.php" style="color: white;"><b>| Penalty |</b></a>
+						<a class="nav-link" href="records.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="records" >Records</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="records.php" style="color: white;">Records</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="termsconditions.php" style="color: white;">Terms & Conditions</a>
+						<a class="nav-link" href="termsconditions.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="terms">Terms & Conditions</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">		
@@ -108,7 +110,7 @@ $result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools WHERE penalty.
 			echo "<td>".$res['lastname'].", ".$res['firstname']."</td>";
 			echo "<td>".$res['toolname']."</td>";
 			echo "<td>".$res['qy']."</td>";
-			echo "<td>".$res['penalty']."</td>";
+			echo "<td>".$res['pen_name']."</td>";
 			echo "<td>".$res['timecharge']."</td>";
 			echo "<td><a href=\"penaltyedit.php?penalty_id=$res[penalty_id]\">Edit</a> | <a href=\"deletepenalty.php?penalty_id=$res[penalty_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
 		}

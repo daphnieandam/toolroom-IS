@@ -114,7 +114,7 @@ include_once("connection.php");
 		?>
 		
 		<?php while($res = mysqli_fetch_array($result)) {	
-			echo $res['lastname']."</br>";
+			echo $res['lastname'].", ".$res['firstname']."</br>";
 		}
 		?></p>
       </div>
@@ -123,22 +123,23 @@ include_once("connection.php");
   <div class="col-sm-4">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
-        <h5 class="card-title" style="font-family:Times New Roman;">Penalties &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="addpen.php">+</a></h5>
+        <h5 class="card-title" style="font-family:Times New Roman;">List of All Charged Borrowers</h5>
         <p class="card-text">
 		<?php
-		$result = mysqli_query($db, "SELECT * FROM penalties");
+		$result = mysqli_query($db, "SELECT * FROM penalty,borrower WHERE penalty.borrower=borrower.stud_id");
 		?>
+		
 		<?php while($res = mysqli_fetch_array($result)) {	
-			echo $res['pen_name']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"del.php?pen_id=$res[pen_id]\" onClick=\"return confirm('delete ?')\">delete</a>"."</br>";
+			echo $res['lastname'].", ".$res['firstname']."</br>";
 		}
 		?></p>
       </div>
     </div>
-  </div>	
+  </div>
 </div>
 </br>
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">Departments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="adddept.php">+</a></h5>
@@ -153,7 +154,7 @@ include_once("connection.php");
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">Sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="addsec.php">+</a></h5>
@@ -168,7 +169,7 @@ include_once("connection.php");
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">Positions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="addpos.php">+</a></h5>
@@ -178,6 +179,21 @@ include_once("connection.php");
 		?>
 		<?php while($res = mysqli_fetch_array($result)) {	
 			echo $res['pos_name']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"del.php?pos_id=$res[pos_id]\" onClick=\"return confirm('delete ?')\">delete</a>"."</br>";
+		}
+		?></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card" style="background-color: #CC7722;">
+      <div class="card-body">
+        <h5 class="card-title" style="font-family:Times New Roman;">Penalties &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="addpen.php">+</a></h5>
+        <p class="card-text">
+		<?php
+		$result = mysqli_query($db, "SELECT * FROM penalties");
+		?>
+		<?php while($res = mysqli_fetch_array($result)) {	
+			echo $res['pen_name']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"del.php?pen_id=$res[pen_id]\" onClick=\"return confirm('delete ?')\">delete</a>"."</br>";
 		}
 		?></p>
       </div>

@@ -37,25 +37,25 @@ if(!isset($_SESSION['valid'])) {
 					<li class="nav-item active" style="color: white;>
 						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="view.php" style="color: white;">Home</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="tools.php" style="color: white;">Tools</a>
+						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools">Tools</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="view.php" style="color: white;">Borrowers</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="students/instructor">Borrowers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="borrowerview.php" style="color: white;">Borrow</a>
+						<a class="nav-link" href="borrowerview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="transaction">Borrow</a>
 					</li>
 										<li class="nav-item">
-						<a class="nav-link" href="penaltyview.php" style="color: white;">Penalty</a>
+						<a class="nav-link" href="penaltyview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="charged">Penalty</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="records.php" style="color: white;">Records</a>
+						<a class="nav-link" href="records.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="records" >Records</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="termsconditions.php" style="color: white;"><b>| Terms & Conditions |</b></a>
+						<a class="nav-link" href="termsconditions.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="terms"><b>| Terms & Conditions |</b></a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-1">
@@ -97,7 +97,7 @@ if(!isset($_SESSION['valid'])) {
         <h4 class="card-title">Terms and Conditions of Borrowing</h4>
         <p class="card-text">
 		- he/she can only borrow tool at the maximum of 3 electronic materials</br>
-		- he/she can use or borrow the material/s for 3 conseccutive days,if exeded he/she will be penalize</br>
+		- he/she can use or borrow the material/s for 3 consecutive days, if exceeded he/she will be penalize</br>
 		- he/she can be penalize for the loss of the material/s</br>
 		</p>
       </div>

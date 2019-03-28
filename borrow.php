@@ -36,26 +36,28 @@ if(!isset($_SESSION['valid'])) {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active" style="color: white;>
+						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="home.php" style="color: white;">Home<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="tools.php" style="color: white;">Tools</a>
+						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools">Tools</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="view.php" style="color: white;">Borrowers</a>
+						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="students/instructor">Borrowers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="borrowerview.php" style="color: white;"><b>| Borrow |</b></a>
+						<a class="nav-link" href="borrowerview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="transaction"><b>| Borrow |</b></a>
+					</li>
+										<li class="nav-item">
+						<a class="nav-link" href="penaltyview.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="charged">Penalty</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="penaltyview.php" style="color: white;">Penalty</a>
+						<a class="nav-link" href="records.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="records" >Records</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="records.php" style="color: white;">Records</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="termsconditions.php" style="color: white;">Terms & Conditions</a>
+						<a class="nav-link" href="termsconditions.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="terms">Terms & Conditions</a>
 					</li>
 				</ul>
 				<nav class="nav-inline my-2 my-lg-0">
