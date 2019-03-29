@@ -13,14 +13,9 @@ include_once("connection.php");
 if(isset($_POST['update']))
 {	
 	$borrow_id = $_POST['borrow_id'];
-	$time = $_POST['time'];
-	$borrower = $_POST['borrower'];
-	$tools = $_POST['tools'];
-	$qty = $_POST['qty'];
-	$notes = $_POST['notes'];
 	$returned = $_POST['returned'];
 	
-	$result = mysqli_query($db, "UPDATE borrow SET time='$time', borrower='$borrower', tools='$tools', qty='$qty', notes='$notes', returned='$returned' WHERE borrow_id=$borrow_id");
+	$result = mysqli_query($db, "UPDATE borrow SET returned='$returned' WHERE borrow_id=$borrow_id");
 		
 		header("Location: borrowerview.php");
 }
@@ -36,7 +31,6 @@ while($res = mysqli_fetch_array($result)) {
 	$borrower1 = $res['firstname'];
 	$tools = $res['toolname'];
 	$qty = $res['qty'];
-	$notes = $res['notes'];
 	$returned = $res['returned'];
 	}
 ?>
@@ -125,7 +119,7 @@ while($res = mysqli_fetch_array($result)) {
 			<div class="form-group row">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">time borrowed</label>
 					<div class="col-sm-5">
-						<input type="" name="time" value="<?php echo $time;?>" class="form-control" id="colFormLabel">
+						<input type="" name="time" value="<?php echo $time;?>" class="form-control">
 					</div>
 			</div>
 			<div class="form-group row">
@@ -149,7 +143,7 @@ while($res = mysqli_fetch_array($result)) {
 			<div class="form-group row">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">time returned</label>
 					<div class="col-sm-5">
-						<input type="date" name="returned" class="form-control" id="colFormLabel" value="<?php echo $timereturned;?>"/>
+						<input type="date" name="returned" class="form-control" id="colFormLabel" value="<?php echo $returned;?>"/>
 					</div>
 			</div>
 			<div class="form-group row">

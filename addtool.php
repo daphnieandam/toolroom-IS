@@ -93,10 +93,9 @@ if(isset($_POST['Submit'])) {
 	$toolname = $_POST['toolname'];
 	$price = $_POST['price'];
 	$quantity = $_POST['quantity'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO tools(toolname, price, quantity, login_id) VALUES('$toolname', '$price', '$quantity', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO tools(toolname, price, quantity) VALUES('$toolname', '$price', '$quantity')");
 		header('location: tools.php');
 	} 
 ?>

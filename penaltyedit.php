@@ -10,19 +10,6 @@ if(!isset($_SESSION['valid'])) {
 
 include_once("connection.php");
 
-if(isset($_POST['update']))
-{	
-	$penalty_id = $_POST['penalty_id'];
-	$borrower = $_POST['borrower'];
-	$tools = $_POST['tools'];
-	$qy = $_POST['qy'];
-	$penalty = $_POST['penalty'];
-	$timecharge = $_POST['timecharge'];
-	
-	$result = mysqli_query($db, "UPDATE penalty SET borrower='$borrower', tools='$tools', qy='$qy', penalty='$penalty', timecharge='$timecharge' WHERE penalty_id=$penalty_id");
-		
-		header("Location: penaltyview.php");
-}
 ?>
 <?php
 $penalty_id = $_GET['penalty_id'];
@@ -147,25 +134,10 @@ while($res = mysqli_fetch_array($result)) {
 			<div class="form-group row">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">penalty</label>
 					<div class="col-sm-5">
-						<select name= "penalty" class="form-control" id="colFormLabel"required>
-							<option value="<?php echo $penalty ?>"><?php echo $penalty ?></option>
-							<?php
-							$penalties= "SELECT * FROM penalties";
-							$penalties= mysqli_query($db, $penalties);
-						?>
-						<?php while ($row = mysqli_fetch_array($penalties)){ ?>
-							<option value="<?php echo $row['pen_id']; ?>"><?php echo $row['pen_name'] ?></option>
-						<?php } ?>
-						</select>
+						<input type="" name="penalty" value="<?php echo $penalty;?>" class="form-control" id="colFormLabel">
 					</div>
 			</div>
-			<div class="form-group row">
-				<label for="colFormLabel" class="col-sm-2 col-form-label"></label>	
-					<div class="col-sm-10">
-						<input type="hidden" name="borrow_id" value=<?php echo $_GET['penalty_id'];?>>
-							<button class="btn btn-outline-success" type="submit" name="update" value="Update">update</button>
-					</div>
-			</div>
+			
 		</form>
 	</div>
 </br/>

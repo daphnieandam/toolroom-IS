@@ -90,10 +90,9 @@ include_once("connection.php");
 
 if(isset($_POST['Submit'])) {	
 	$dept_name = $_POST['dept_name'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO department (dept_name, login_id) VALUES('$dept_name', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO department (dept_name) VALUES('$dept_name')");
 		header('location: records.php');
 	} 
 ?>

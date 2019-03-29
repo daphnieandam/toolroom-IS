@@ -142,7 +142,7 @@ include_once("connection.php");
   <div class="col-sm-3">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
-        <h5 class="card-title" style="font-family:Times New Roman;">Departments &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="adddept.php">+</a></h5>
+        <h5 class="card-title" style="font-family:Times New Roman;">Departments &nbsp;&nbsp;<a class="btn btn-sm btn-warning" href="adddept.php">+</a></h5>
         <p class="card-text">
 		<?php
 		$result = mysqli_query($db, "SELECT * FROM department");

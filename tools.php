@@ -9,7 +9,7 @@ if(!isset($_SESSION['valid'])) {
 <?php	
 include_once("connection.php");
 
-$result = mysqli_query($db, "SELECT * FROM tools WHERE login_id=".$_SESSION['id']." ORDER BY toolname ASC");
+$result = mysqli_query($db, "SELECT * FROM tools ORDER BY toolname ASC");
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ $result = mysqli_query($db, "SELECT * FROM tools WHERE login_id=".$_SESSION['id'
 					<li class="nav-item active" style="color: white;>
 						<ul class="navbar-nav mr-auto" >
 					<li class="nav-item active">
-						<a class="nav-link" href="view.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
+						<a class="nav-link" href="home.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="home">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="tools.php" style="color: white;" data-toggle="tooltip" data-placement="top" title="tools"><b>| Tools |</b></a>

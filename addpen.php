@@ -90,10 +90,9 @@ include_once("connection.php");
 
 if(isset($_POST['Submit'])) {	
 	$pen_name = $_POST['pen_name'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO penalties (pen_name, login_id) VALUES('$pen_name', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO penalties (pen_name) VALUES('$pen_name')");
 		header('location: records.php');
 	} 
 ?>
@@ -101,7 +100,7 @@ if(isset($_POST['Submit'])) {
 <div class="container">
 	<form action="addpen.php" method="post" name="form1">
 		<div class="form-group row">
-			<label for="colFormLabel" class="col-sm-2 col-form-label">position name</label>
+			<label for="colFormLabel" class="col-sm-2 col-form-label">penalty name</label>
 				<div class="col-sm-5">
 					<input type="text" name="pen_name" class="form-control" id="colFormLabel" required>
 				</div>

@@ -81,7 +81,7 @@ if(!isset($_SESSION['valid'])) {
   <div class="col-sm-6">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
-        <h4 class="card-title">Terms and Condition for the Borrower</h4>
+        <h4 class="card-title">Terms & Condition for the Borrower</h4>
         <p class="card-text">
 		- he/she must be a registered student in USTP oroquieta Campus.</br>
 		- he/she must be responsible in handling electronic materials</br>

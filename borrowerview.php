@@ -88,7 +88,7 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 		<nav aria-label="breadcrumb" role="navigation">
 			<div class="col-sm-5">	
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page">List of Tools</li>
+					<li class="breadcrumb-item active" aria-current="page">List of Borrowers</li>
 				</ol>
 			</div>
 			<div class="col-sm-5">	
@@ -102,7 +102,6 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 			<td>Student / Instructor</td>
 			<td>Borrowed tools</td>
 			<td>quantity</td>
-			<td>notes</td>
 			<td>Time Borrowed</td>
 			<td>Time Returned</td>
 			<td>action</td>
@@ -113,10 +112,9 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 			echo "<td>".$res['lastname'].", ".$res['firstname']."</td>";
 			echo "<td>".$res['toolname']."</td>";
 			echo "<td>".$res['qty']."</td>";
-			echo "<td>".$res['notes']."</td>";
 			echo "<td>".$res['time']."</td>";
 			echo "<td>".$res['returned']."</td>";
-			echo "<td><a href=\"borrowedit.php?borrow_id=$res[borrow_id]\">Edit</a> | <a href=\"borrowdelete.php?borrow_id=$res[borrow_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
+			echo "<td><a href=\"borrowedit.php?borrow_id=$res[borrow_id]\">details</a> | <a href=\"borrowdelete.php?borrow_id=$res[borrow_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
 		}
 		?>
 		

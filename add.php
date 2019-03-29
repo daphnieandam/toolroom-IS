@@ -99,10 +99,9 @@ if(isset($_POST['Submit'])) {
 	$phone_number = $_POST['phone_number'];
 	$email = $_POST['email'];
 	$address = $_POST['address'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO borrower(stud_id, firstname, lastname, position , section, department, phone_number, email, address, login_id) VALUES('$stud_id', '$firstname', '$lastname', '$position', '$section', '$department', '$phone_number', '$email', '$address', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO borrower(stud_id, firstname, lastname, position , section, department, phone_number, email, address) VALUES('$stud_id', '$firstname', '$lastname', '$position', '$section', '$department', '$phone_number', '$email', '$address')");
 		header('location: view.php');
 	} 
 ?>

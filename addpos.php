@@ -90,10 +90,9 @@ include_once("connection.php");
 
 if(isset($_POST['Submit'])) {	
 	$pos_name = $_POST['pos_name'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO position (pos_name, login_id) VALUES('$pos_name', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO position (pos_name) VALUES('$pos_name')");
 		header('location: records.php');
 	} 
 ?>

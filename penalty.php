@@ -95,10 +95,9 @@ if(isset($_POST['Submit'])) {
 	$qy = $_POST['qy'];
 	$penalty = $_POST['penalty'];
 	$timecharge = $_POST['timecharge'];
-	$loginId = $_SESSION['id'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO penalty(borrower, tools, qy, penalty, timecharge, login_id) VALUES('$borrower', '$tools', '$qy', '$penalty', '$timecharge', '$loginId')");
+	$result = mysqli_query($db, "INSERT INTO penalty(borrower, tools, qy, penalty, timecharge) VALUES('$borrower', '$tools', '$qy', '$penalty', '$timecharge')");
 		header('location: penaltyview.php');
 	} 
 ?>

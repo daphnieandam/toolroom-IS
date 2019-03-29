@@ -7,7 +7,7 @@ if(!isset($_SESSION['valid'])) {
 ?>
 <?php	
 include("connection.php");
-$result = mysqli_query($db, "SELECT * FROM borrower WHERE login_id=".$_SESSION['id']." ORDER BY lastname ASC");
+$result = mysqli_query($db, "SELECT * FROM borrower ORDER BY lastname ASC");
 ?>
 
 <!DOCTYPE html>

@@ -86,7 +86,7 @@ $result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools,penalties WHER
 		<nav aria-label="breadcrumb" role="navigation">
 			<div class="col-sm-5">	
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page">List of Tools</li>
+					<li class="breadcrumb-item active" aria-current="page">List of penalty</li>
 				</ol>
 			</div>
 			<div class="col-sm-5">	
@@ -112,7 +112,7 @@ $result = mysqli_query($db, "SELECT * FROM penalty,borrower,tools,penalties WHER
 			echo "<td>".$res['qy']."</td>";
 			echo "<td>".$res['pen_name']."</td>";
 			echo "<td>".$res['timecharge']."</td>";
-			echo "<td><a href=\"penaltyedit.php?penalty_id=$res[penalty_id]\">Edit</a> | <a href=\"deletepenalty.php?penalty_id=$res[penalty_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
+			echo "<td><a href=\"penaltyedit.php?penalty_id=$res[penalty_id]\">details</a> | <a href=\"deletepenalty.php?penalty_id=$res[penalty_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
 		}
 		?>
 		

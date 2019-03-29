@@ -78,11 +78,11 @@ if(!isset($_SESSION['valid'])) {
 	</nav>
 <br/>
 	<div class="container">
-	<center>
+	<center></br>
 		<p>
 			A toolroom is a room where tools are stored.
 		</p>
-		</center>
+		</center></br>
 		<div class="row" >
 		<div class="col-sm-3" >
     <div class="card text-center" style="background-color: #CC7722;">
@@ -96,7 +96,7 @@ if(!isset($_SESSION['valid'])) {
   <div class="col-sm-3">
     <div class="card text-center" style="background-color: #CC7722;">
       <div class="card-body">
-        <h4 class="card-title">Students / Instructor</h4>
+        <h4 class="card-title">Brrowers</h4>
         <a class="btn btn-sm btn-outline-warning" href="add.php">add</a>
       </div>
     </div>
