@@ -91,15 +91,15 @@ if(!isset($_SESSION['valid'])) {
 
 include_once("connection.php");
 
-if(isset($_POST['Submit'])) {	
+if(isset($_POST['Submit'])) {
+	
 	$borrower = $_POST['borrower'];
 	$tools = $_POST['tools'];
 	$qty = $_POST['qty'];
-	$notes = $_POST['notes'];
 	$returned = $_POST['returned'];
 	
 		
-	$result = mysqli_query($db, "INSERT INTO `borrow` (`borrower`, `tools`, `qty`, `notes`, `returned`) VALUES ('$borrower', '$tools', '$qty', '$notes', '$returned')");
+	$result = mysqli_query($db, "INSERT INTO `borrow` (`borrower`, `tools`, `qty`, `returned`) VALUES ('$borrower', '$tools', '$qty', '$returned')");
 		header('location: borrowerview.php');
 	} 
 ?>
@@ -125,78 +125,30 @@ if(isset($_POST['Submit'])) {
 		 <input type="date" name="time" class="form-control" id="colFormLabel"/>
     </div>
 	</div>
-  
-	<div class="row">
-	<div class="col-md-4 mb-3">
+  <div class="row">
+    <div class="col-md-4 mb-3">
       <label for="colFormLabel" class="col-sm col-form-label">tool /s to borrow</label>
 			<?php
 			$tools= "SELECT * FROM tools";
 			$tools= mysqli_query($db, $tools);
 		?>
-		<select name= "tools" multiple="multiple" class="form-control" id="more"required>
+		<select name= "tools" class="form-control" id="tools"required>
 			<option value=""></option>
 		<?php while ($row = mysqli_fetch_array($tools)){ ?>
-			<option value="1<?php echo $row['tool_id']; ?>"><?php echo $row[1] ?></option>
+			<option value="<?php echo $row['tool_id']; ?>"><?php echo $row[1] ?></option>
 		<?php } ?>
 		</select>
     </div>
 	<div class="col-md-2 mb-3">
 		<label for="colFormLabel" class="col-sm col-form-label">quantity</label>
-		<select name="qty" multiple="multiple" class="form-control" id="more"required>
+		<select name="qty" class="form-control" id="qty"required>
 			<option value=""></option>
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 		</select>
     </div>
-	</div>
-	<div class="row">
-	<div class="col-md-4 mb-3">
-      <label for="colFormLabel" multiple="multiple" class="col-sm col-form-label">tool /s to borrow</label>
-			<?php
-			$tools= "SELECT * FROM tools";
-			$tools= mysqli_query($db, $tools);
-		?>
-		<select name= "tools" multiple="multiple"class="form-control" id="more"required>
-			<option value=""></option>
-		<?php while ($row = mysqli_fetch_array($tools)){ ?>
-			<option value="2<?php echo $row['tool_id']; ?>"><?php echo $row[1] ?></option>
-		<?php } ?>
-		</select>
-    </div>
-	<div class="col-md-2 mb-3">
-		<label for="colFormLabel" class="col-sm col-form-label">quantity</label>
-		<select name="qty" multiple="multiple"class="form-control" id="more"required>
-			<option value=""></option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
-    </div>
-	</div>
-	<div class="row">
-	<div class="col-md-4 mb-3">
-      <label for="colFormLabel" class="col-sm col-form-label">tool /s to borrow</label>
-			<?php
-			$tools= "SELECT * FROM tools";
-			$tools= mysqli_query($db, $tools);
-		?>
-		<select name= "tools" multiple="multiple" class="form-control" id="more"required>
-			<option value=""></option>
-		<?php while ($row = mysqli_fetch_array($tools)){ ?>
-			<option value="3<?php echo $row['tool_id']; ?>"><?php echo $row[1] ?></option>
-		<?php } ?>
-		</select>
-    </div>
-	<div class="col-md-2 mb-3">
-		<label for="colFormLabel" class="col-sm col-form-label">quantity</label>
-		<select name="qty" multiple="multiple" class="form-control" id="more"required>
-			<option value=""></option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
-    </div>
+
 	</div>
 		<div class="row">
     <div class="col-md-6 mb-3">
