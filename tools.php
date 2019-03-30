@@ -105,7 +105,7 @@ $result = mysqli_query($db, "SELECT * FROM tools ORDER BY toolname ASC");
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
-			echo '<tr style="color: #CC7722;">';
+			echo '<tr style="color: #ffc107;">';
 			echo "<td>".$res['toolname']."</td>";
 			echo "<td>₱ ".$res['price']."</td>";
 			echo "<td>".$res['quantity']."</td>";

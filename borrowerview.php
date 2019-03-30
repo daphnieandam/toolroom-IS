@@ -92,7 +92,7 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 				</ol>
 			</div>
 			<div class="col-sm-5">	
-				<a class="btn btn-sm btn-outline-warning" href="borrow.php">add borrower</a>
+				<a class="btn btn-sm btn-outline-warning" href="borrow.php">add borrow</a>
 			</div>
 		</nav>
 <br/>
@@ -108,7 +108,7 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
-			echo '<tr style="color: #CC7722;">';
+			echo '<tr style="color: #ffc107;">';
 			echo "<td>".$res['lastname'].", ".$res['firstname']."</td>";
 			echo "<td>".$res['toolname']."</td>";
 			echo "<td>".$res['qty']."</td>";

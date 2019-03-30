@@ -76,13 +76,15 @@ if(!isset($_SESSION['valid'])) {
 	</div>
 	</nav>
 <br/>
+<br/>
+<br/>
 	<div class="container">
 		<div class="row" style="color: white;">
   <div class="col-sm-6">
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h4 class="card-title">Terms & Condition for the Borrower</h4>
-        <p class="card-text">
+        <p class="card-text" style="color: #ffc107;">
 		- he/she must be a registered student in USTP oroquieta Campus.</br>
 		- he/she must be responsible in handling electronic materials</br>
 		- </br>
@@ -95,7 +97,7 @@ if(!isset($_SESSION['valid'])) {
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h4 class="card-title">Terms and Conditions of Borrowing</h4>
-        <p class="card-text">
+        <p class="card-text" style="color: #ffc107;">
 		- he/she can only borrow tool at the maximum of 3 electronic materials</br>
 		- he/she can use or borrow the material/s for 3 consecutive days, if exceeded he/she will be penalize</br>
 		- he/she can be penalize for the loss of the material/s</br>
@@ -104,6 +106,7 @@ if(!isset($_SESSION['valid'])) {
     </div>
   </div>
 </div>
+</br>
 </br>
 	<div class="footer text-center">
 		<img src="icon/FB.png" width="40" height="40" alt="icon/FB.png"/>

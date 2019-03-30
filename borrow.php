@@ -82,7 +82,7 @@ if(!isset($_SESSION['valid'])) {
 		<nav aria-label="breadcrumb" role="navigation">
 			<div class="col-sm-5">	  
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="borrowerview.php">List of Borrowers</a></li>
+					<li class="breadcrumb-item"><a href="borrowerview.php">List of Transaction</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Add Borrower</li>
 				</ol>
 			</div>

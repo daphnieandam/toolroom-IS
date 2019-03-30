@@ -105,7 +105,7 @@ $result = mysqli_query($db, "SELECT * FROM borrower,position,section,department 
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
-			echo '<tr style="color: #CC7722;">';
+			echo '<tr style="color: #ffc107;">';
 			echo "<td>".$res['stud_id']."</td>";
 			echo "<td>".$res['lastname']."</td>";
 			echo "<td>".$res['firstname']."</td>";

@@ -93,7 +93,7 @@ include_once("connection.php");
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">Borrowed Tools</h5>
-        <p class="card-text">
+        <p class="card-text" style="color: #ffc107;">
 		<?php
 		$result = mysqli_query($db, "SELECT * FROM borrow,tools WHERE borrow.tools=tools.tool_id");
 		?>
@@ -108,7 +108,7 @@ include_once("connection.php");
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">List of All Borrowers</h5>
-        <p class="card-text">
+        <p class="card-text" style="color: #ffc107;">
 		<?php
 		$result = mysqli_query($db, "SELECT * FROM borrow,borrower WHERE borrow.borrower=borrower.stud_id");
 		?>
@@ -124,7 +124,7 @@ include_once("connection.php");
     <div class="card" style="background-color: #CC7722;">
       <div class="card-body">
         <h5 class="card-title" style="font-family:Times New Roman;">List of All Charged Borrowers</h5>
-        <p class="card-text">
+        <p class="card-text" style="color: #ffc107;">
 		<?php
 		$result = mysqli_query($db, "SELECT * FROM penalty,borrower WHERE penalty.borrower=borrower.stud_id");
 		?>
