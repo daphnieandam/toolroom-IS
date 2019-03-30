@@ -7,7 +7,7 @@ if(!isset($_SESSION['valid'])) {
 ?>
 <?php	
 include("connection.php");
-$result = mysqli_query($db, "SELECT * FROM borrower,position,section,department ORDER BY lastname ASC");
+$result = mysqli_query($db, "SELECT * FROM borrower,position,section,department WHERE borrower.position=position.pos_id AND borrower.section=section.sec_id AND borrower.department=department.dept_id  ORDER BY lastname ASC");
 ?>
 
 <!DOCTYPE html>

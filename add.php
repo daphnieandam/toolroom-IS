@@ -91,6 +91,7 @@ include_once("connection.php");
 
 if(isset($_POST['Submit'])) {	
 	$stud_id = $_POST['stud_id'];
+	
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
 	$position = $_POST['position'];

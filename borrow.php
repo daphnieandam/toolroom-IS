@@ -141,12 +141,7 @@ if(isset($_POST['Submit'])) {
     </div>
 	<div class="col-md-2 mb-3">
 		<label for="colFormLabel" class="col-sm col-form-label">quantity</label>
-		<select name="qty" class="form-control" id="qty"required>
-			<option value=""></option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
+		<input type="number" name="qty" class="form-control" id="qty" required />
     </div>
 
 	</div>
