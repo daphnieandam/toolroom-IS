@@ -10,7 +10,8 @@ if(!isset($_SESSION['valid'])) {
 
 include_once("connection.php");
 
-if(isset($_POST['update'])) {	
+if(isset($_POST['update'])) 
+{
 	$stud_id = $_POST['stud_id'];
 	
 	$firstname = $_POST['firstname'];
@@ -22,7 +23,7 @@ if(isset($_POST['update'])) {
 	$email = $_POST['email'];
 	$address = $_POST['address'];
 	
-	$result = mysqli_query($db, "UPDATE `borrower` SET `stud_id` = '$stud_id', `firstname` = '$firstname', `lastname` = '$lastname',  `position` = '$position',  `section` = '$section', `department` = '$department', `phone_number` = '$phone_number', `email` = '$email', `address` = '$address' WHERE stud_id=$stud_id");
+	$result = mysqli_query($db, "UPDATE `borrower` SET `stud_id` = '$stud_id', `firstname` = '$firstname', `lastname` = '$lastname', `phone_number` = '$phone_number', `email` = '$email', `address` = '$address' WHERE borrower.stud_id=$stud_id");
 
 		header("Location: view.php");
 }
@@ -30,7 +31,7 @@ if(isset($_POST['update'])) {
 <?php
 $stud_id = $_GET['stud_id'];
 
-$result = mysqli_query($db, "SELECT * FROM borrower, position, section, department WHERE borrower.position=position.pos_id AND borrower.section=section.sec_id AND borrower.department=department.dept_id AND borrower.stud_id=$stud_id");
+$result = mysqli_query($db, "SELECT * FROM borrower, position, section, department WHERE borrower.position = position.pos_id AND borrower.section = section.sec_id AND borrower.department = department.dept_id AND borrower.stud_id = $stud_id;");
 
 while($res = mysqli_fetch_array($result)) {
 	
@@ -213,7 +214,7 @@ while($res = mysqli_fetch_array($result)) {
 				<label for="colFormLabel" class="col-sm-2 col-form-label"></label>	
 					<div class="col-sm-10">
 						<input type="hidden" name="stud_id" value=<?php echo $_GET['stud_id'];?>>
-							<button class="btn btn-outline-success" type="submit" name="update" value="Update">update</button>
+							<button class="btn btn-outline-success" type="submit" name="update" value="update">update</button>
 					</div>
 			</div>
 		</form>

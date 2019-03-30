@@ -7,7 +7,7 @@ if(!isset($_SESSION['valid'])) {
 ?>
 <?php	
 include("connection.php");
-$result = mysqli_query($db, "SELECT * FROM borrower ORDER BY lastname ASC");
+$result = mysqli_query($db, "SELECT * FROM borrower,position,section,department ORDER BY lastname ASC");
 ?>
 
 <!DOCTYPE html>
@@ -93,19 +93,27 @@ $result = mysqli_query($db, "SELECT * FROM borrower ORDER BY lastname ASC");
 <br/>
 	<div class="container">
 		<table class="table">
-			<tr bgcolor='#CC7722'>
+			<tr bgcolor='#CC7722' >
 			<td>ID No.</td>
 			<td>lastname</td>
 			<td>firstname</td>
+			<td>emails</td>
+			<td>positions</td>
+			<td>section</td>
+			<td>departments</td>
 			<td>action</td>
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
-			echo "<tr>";
+			echo '<tr style="color: #CC7722;">';
 			echo "<td>".$res['stud_id']."</td>";
 			echo "<td>".$res['lastname']."</td>";
 			echo "<td>".$res['firstname']."</td>";
-			echo "<td><a href=\"edit.php?stud_id=$res[stud_id]\">Edit</a> | <a href=\"delete.php?stud_id=$res[stud_id]\" onClick=\"return confirm('delete tool?')\">Delete</a></td>";		
+			echo "<td>".$res['email']."</td>";
+			echo "<td>".$res['pos_name']."</td>";
+			echo "<td>".$res['sec_name']."</td>";
+			echo "<td>".$res['dept_name']."</td>";
+			echo "<td><a href=\"edit.php?stud_id=$res[stud_id]\">see more</a> | <a href=\"delete.php?stud_id=$res[stud_id]\" onClick=\"return confirm('delete tool?')\">Delete</a></td>";		
 		}
 		?>
   <tbody>

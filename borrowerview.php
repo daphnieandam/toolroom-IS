@@ -108,7 +108,7 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
-			echo "<tr>";
+			echo '<tr style="color: #CC7722;">';
 			echo "<td>".$res['lastname'].", ".$res['firstname']."</td>";
 			echo "<td>".$res['toolname']."</td>";
 			echo "<td>".$res['qty']."</td>";

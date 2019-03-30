@@ -145,10 +145,7 @@ while($res = mysqli_fetch_array($result)) {
 					<div class="col-sm-5">
 						<input type="date" name="returned" class="form-control" id="colFormLabel" value="<?php echo $returned;?>"/>
 					</div>
-			</div>
-			<div class="form-group row">
-				<label for="colFormLabel" class="col-sm-2 col-form-label"></label>	
-					<div class="col-sm-10">
+					<div class="col-sm-5">
 						<input type="hidden" name="borrow_id" value=<?php echo $_GET['borrow_id'];?>>
 							<button class="btn btn-outline-success" type="submit" name="update" value="Update">update</button>
 					</div>
