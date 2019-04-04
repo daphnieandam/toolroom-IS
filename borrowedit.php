@@ -15,7 +15,7 @@ if(isset($_POST['update']))
 	$transaction_id = $_POST['transaction_id'];
 	$returned = $_POST['returned'];
 	
-	$result = mysqli_query($db, "UPDATE transaction SET returned='$returned' WHERE transaction_id = '$transaction_id");
+	$result = mysqli_query($db, "UPDATE transaction SET returned = '$returned' WHERE transaction.transaction_id = '$transaction_id'");
 		
 		header("Location: borrowerview.php");
 }
@@ -23,14 +23,15 @@ if(isset($_POST['update']))
 <?php
 $transaction_id = $_GET['transaction_id'];
 
-$result = mysqli_query($db, "select transaction.transaction_id,borrower.firstname,borrower.lastname,tools.toolname,sum(borrowed_tools.quantity),transaction.time,transaction.returned from transaction,borrowed_tools,borrower,tools WHERE transaction.borrower = borrower.stud_id AND transaction.transaction_id=borrowed_tools.transaction_id AND borrowed_tools.tools = tools.tool_id GROUP BY transaction.transaction_id");
+$result = mysqli_query($db, "SELECT * FROM transaction,borrowed_tools, tools, borrower WHERE transaction.borrower = borrower.stud_id AND transaction.transaction_id = borrowed_tools.transaction_id AND tools.tool_id = borrowed_tools.tools AND transaction.transaction_id = '$transaction_id'");
 
 while($res = mysqli_fetch_array($result)) {
+	$transaction_id = $_GET['transaction_id'];
 	$time = $res['time'];
 	$borrower = $res['lastname'];
 	$borrower1 = $res['firstname'];
 	$tools = $res['toolname'];
-	$quantity = $res['sum(borrowed_tools.quantity)'];
+	$quantity = $res['quantity'];
 	$returned = $res['returned'];
 	}
 ?>

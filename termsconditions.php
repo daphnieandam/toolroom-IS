@@ -87,7 +87,7 @@ if(!isset($_SESSION['valid'])) {
         <p class="card-text" style="color: #ffc107;">
 		- he/she must be a registered student in USTP oroquieta Campus.</br>
 		- he/she must be responsible in handling electronic materials</br>
-		- </br>
+		- he/she must fill up the slip given by the tool admin to be able to borrow tools</br>
 		
 		</p>
       </div>
