@@ -1,11 +1,78 @@
-<?php session_start(); ?>
-
 <?php
-if(!isset($_SESSION['valid'])) {
-	header('Location: login.php');
+    session_start();
+include("connection.php");
+
+function loadtools($db){  
+    $output = "";
+    $tools = "select * from tools;";
+    $query = mysqli_query($db, $tools);
+
+    while($row = mysqli_fetch_assoc($query)){
+        $output .= '<option value="'.$row["tool_id"].'">'.$row["toolname"].'</option>';
+    }
+    return $output;
+}
+    
+
+if(isset($_POST['submit'])){
+        
+        
+        $borrower = $_POST['borrower'];
+        $tools = $_POST['tools'];
+        $quantity = $_POST['quantity'];
+        $transaction = array();
+        $query = "";
+
+        $sql = "INSERT INTO `transaction` (`borrower`) VALUES ($borrower);";
+        $result = mysqli_query($db, $sql);
+
+        if($result == true){
+            $sql1 = "SELECT transaction_id FROM transaction ORDER BY transaction_id DESC";
+            $result1 = mysqli_query($db, $sql1);
+            $row = mysqli_fetch_array($result1);
+            for($i=0; $i < count($_POST['tools']); $i++){
+                $transaction[] = $row['transaction_id'];
+            }
+            for($j=0; $j< count($_POST['tools']);$j++){
+                $tool_id = mysqli_real_escape_string($db, $tools[$j]); 
+                $qty = mysqli_real_escape_string($db, $quantity[$j]); 
+
+                $sql2 = "SELECT quantity FROM tools WHERE tool_id='$tool_id'";
+                $result2 = mysqli_query($db, $sql2);
+                $qty1 = mysqli_fetch_array($result2);
+                $newqty = $qty1['quantity'] - $qty;
+                $sql3 = "UPDATE tools SET quantity=$newqty WHERE tool_id='$tool_id'";
+                $result2 = mysqli_query($db, $sql3);
+            }
+            for($num=0; $num<count($_POST['tools']); $num++){
+                $tools1 = mysqli_real_escape_string($db, $tools[$num]);
+                $quantity1 = mysqli_real_escape_string($db, $quantity[$num]);
+                $transaction1 = mysqli_real_escape_string($db, $transaction[$num]);
+
+                $query .= "INSERT INTO borrowed_tools(transaction_id,tools,quantity) VALUES($transaction1,$tools1,$quantity1);";
+            }
+
+            if($query != ""){
+                if(mysqli_multi_query($db, $query)){
+                     echo "<script>
+					 if(msg == true || msg == false){
+                        header('Location: borrowerview.php');
+                    }</script>";
+                }else{
+                     echo "<script>var msg = confirm('Something went wrong!');
+                    if(msg == true || msg == false){
+                        location.href='borrow.php';
+                    }
+            </script>";
+                }
+
+
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,90 +145,83 @@ if(!isset($_SESSION['valid'])) {
 	</div>
 	</nav>
 <br/>
-<div class="container">
-		<nav aria-label="breadcrumb" role="navigation">
-			<div class="col-sm-5">	  
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="borrowerview.php">List of Transaction</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Add Borrower</li>
-				</ol>
-			</div>
-		</nav>
-<?php
+<div class="container">             
+ <div class="container-fluid">
+            <form  method="post" enctype="multipart/form-data">
+            <div style="text-align:center" class="col-sm-3 col-sm-offset-2">  
+            </div>
+                <div class="w-100">
+                    <div class="form-group w-50" style="width:300px;">
+                    <?php
+                        $borrower = "SELECT * FROM `borrower` "; 
+                        $query = mysqli_query($db, $borrower);
+                    ?>
+                            <label form="borrower">students / instructor</label>
+                            <select class="form-control" name="borrower" placeholder="Name" autofocus required>
+                                    <option selected></option>
+                                        <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                    <option value="<?php echo $row['stud_id']; ?>"> <?php echo ucfirst($row['lastname'].", ".$row['firstname'])?> </option>
+                                        <?php } ?>
+                            </select>
+                        </div><div class="table-responsive">
+                                <table class="table w-100 table-bordered" id="tools">
+                                    <tr><td>
+                                     <div class="col-sm-12">
+                                     <div class="form-group">
+                                            <?php
+                                                $tools = "select * from tools";
+                                                $query = mysqli_query($db, $tools);
+                                            ?>
+                                    <label for="tools">toolname </label>
+                                         <select class="form-control" id="tools1" name="tools[]" placeholder="Name" autofocus required>
+                                            <option selected></option>                                           
+                                            <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                                        <option value="<?php echo $row['tool_id']; ?>"> <?php echo ucfirst($row[1] )?> </option>
+                                                     <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div></td>
+                                        <td>
+                                     <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <label for="quantity">quantity</label>
+                                            <input type="number" class="form-control text-field" id="quantity1" name="quantity[]" placeholder="Quantity">
+                                        </div>
+                                    </div></td>
+                                </tr>
+                                    </table>
+                            <button type="submit" name="submit" class="btn btn-outline-warning btn-block-sm">Save</button>
+                            <button type="button" class="add btn btn-outline-warning btn-block-sm">+</button>
 
-include_once("connection.php");
+                 
+                  
 
-if(isset($_POST['Submit'])) {
-	
-	$borrower = $_POST['borrower'];
-	$tools = $_POST['tools'];
-	$qty = $_POST['qty'];
-	$returned = $_POST['returned'];
-	
-		
-	$result = mysqli_query($db, "INSERT INTO `borrow` (`borrower`, `tools`, `qty`, `returned`) VALUES ('$borrower', '$tools', '$qty', '$returned')");
-		header('location: borrowerview.php');
-	} 
-?>
-
-<div class="container">
-	<form action="borrow.php" method="post" name="form1">
-	<div class="row">
-	<div class="col-md-6 mb-3">
-      <label for="colFormLabel" class="col-sm col-form-label">Student / Instructor</label>
-		<?php
-			$borrower= "SELECT * FROM borrower";
-			$borrower= mysqli_query($db, $borrower);
-		?>
-		<select name= "borrower" class="form-control" id="colFormLabel"required>
-			<option value=""></option>
-		<?php while ($row = mysqli_fetch_array($borrower)){ ?>
-			<option value="<?php echo $row['stud_id']; ?>"><?php echo $row['lastname'].", ".$row['firstname'] ?></option>
-		<?php } ?>
-		</select>
-    </div>
-	<div class="col-md-6 mb-3">
-      <label for="colFormLabel" class="col-sm col-form-label">Date Borrowed</label>
-		 <input type="date" name="time" class="form-control" id="colFormLabel"/>
-    </div>
-	</div>
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <label for="colFormLabel" class="col-sm col-form-label">tool /s to borrow</label>
-			<?php
-			$tools= "SELECT * FROM tools";
-			$tools= mysqli_query($db, $tools);
-		?>
-		<select name= "tools" class="form-control" id="tools"required>
-			<option value=""></option>
-		<?php while ($row = mysqli_fetch_array($tools)){ ?>
-			<option value="<?php echo $row['tool_id']; ?>"><?php echo $row[1] ?></option>
-		<?php } ?>
-		</select>
-    </div>
-	<div class="col-md-2 mb-3">
-		<label for="colFormLabel" class="col-sm col-form-label">quantity</label>
-		<input type="number" name="qty" class="form-control" id="qty" required />
-    </div>
-
-	</div>
-		<div class="row">
-    <div class="col-md-6 mb-3">
-					<button class="btn btn-outline-warning" type="submit" name="Submit" value="Add">save</button>
-				</div>
-		</div>
-	</form>
-	</div>
-</br>
-	<div class="footer text-center">
-		<img src="icon/FB.png" width="40" height="40" alt="icon/FB.png"/>
-		<img src="icon/GIT.png" width="35" height="35" alt="icon/GIT.png"/>
-		<img src="icon/GMAIL.png" width="30" height="30" alt="icon/GMAIL.png"/>
-		<img src="icon/T.png" width="30" height="30" alt="icon/T.png"/>
-		<img src="icon/C.png" width="30" height="30" alt="icon/C.png"/>
-		<img src="icon/M.png" width="30" height="30" alt="icon/M.png"/>
-		<p><font size="1">&copy; daphnieandam</font></p>
-	</div>
+             </div>
+         </div>
+         </form>
 </div>
+</div>
+<script>
+        $(document).ready(function(){
+            var count = 1;
+            $(document).on('click','.add', function(){
+                count += 1;
+                var html_code = ''; 
+                html_code += '<tr id="row_id_'+count+'">';
+                html_code += '<td> <div class="col-sm-12"><div class="form-group"><label form="borrower"> toolname</label><select  class="form-control" name="tools[]"  autofocus required id="tools'+count+'"><option selected></option><?php echo loadtools($db); ?></select></div></div></td>';
+                html_code += '<td><div class="col-sm-7"><div class="form-group"><label for="quantity">quantity</label><input type="number" name="quantity[]" min="1" id="quantity'+count+'" data-srno="'+count+'" placeholder="Quantity"  class="form-control form-control-sm nput-sm quantity" /></div></div</td>';
+                html_code += '<td><button type="button" id="'+count+'" class="btn btn-sm btn-outline-warning remove">-</button></tr>';
+                $("#tools").append(html_code);
+            });
+      
+
+  $(document).on('click','.remove',function(){
+    var row_id = $(this).attr("id");
+        $('#row_id_'+row_id).remove();
+    count -= 1;
+  });
+
+
+});</script>
 </body>
 </html>

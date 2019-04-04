@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2019 at 03:38 PM
+-- Generation Time: Apr 01, 2019 at 05:19 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -25,25 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `borrow`
+-- Table structure for table `borrowed_tools`
 --
 
-CREATE TABLE `borrow` (
-  `borrow_id` int(11) NOT NULL,
-  `borrower` int(11) NOT NULL,
+CREATE TABLE `borrowed_tools` (
+  `transaction_id` int(11) NOT NULL,
   `tools` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `returned` date DEFAULT NULL
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `borrow`
+-- Dumping data for table `borrowed_tools`
 --
 
-INSERT INTO `borrow` (`borrow_id`, `borrower`, `tools`, `qty`, `time`, `returned`) VALUES
-(1, 444, 1, 2, '2019-03-28 14:16:52', '2019-03-30'),
-(2, 444, 1, 2, '2019-03-28 14:13:54', '2019-03-28');
+INSERT INTO `borrowed_tools` (`transaction_id`, `tools`, `quantity`) VALUES
+(1, 4, 1),
+(1, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -68,7 +65,8 @@ CREATE TABLE `borrower` (
 --
 
 INSERT INTO `borrower` (`stud_id`, `firstname`, `lastname`, `section`, `department`, `position`, `phone_number`, `email`, `address`) VALUES
-(444, 'zx', 'zx', 1, 1, 1, '09214748364', 'jungel5thyr@yahoo.com', 'lj');
+(45, 'CASS', 'ABANTE', 3, 2, 2, '09689678', 'dfgsdfgsdfnie@gmail.com', 'lj'),
+(615100, 'daphnie', 'andam', 3, 2, 2, '098876544', 'andamdaphnie@gmail.com', 'lj');
 
 -- --------------------------------------------------------
 
@@ -86,7 +84,7 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
-(1, 'BSBA');
+(2, 'IT');
 
 -- --------------------------------------------------------
 
@@ -108,7 +106,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `firstname`, `lastname`, `email`, `username`, `password`) VALUES
-(2, 'daphnie', 'andam', 'andamdaphnie@gmail.com', 'adminon', '21232f297a57a5a743894a0e4a801fc3');
+(2, 'daphnie', 'andam', 'andamdaphnie@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -126,7 +124,7 @@ CREATE TABLE `penalties` (
 --
 
 INSERT INTO `penalties` (`pen_id`, `pen_name`) VALUES
-(1, 'community service');
+(2, 'pay');
 
 -- --------------------------------------------------------
 
@@ -142,13 +140,6 @@ CREATE TABLE `penalty` (
   `penalty` int(100) DEFAULT NULL,
   `timecharge` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `penalty`
---
-
-INSERT INTO `penalty` (`penalty_id`, `borrower`, `tools`, `qy`, `penalty`, `timecharge`) VALUES
-(1, 444, 1, '1', 1, '2019-03-28');
 
 -- --------------------------------------------------------
 
@@ -166,7 +157,7 @@ CREATE TABLE `position` (
 --
 
 INSERT INTO `position` (`pos_id`, `pos_name`) VALUES
-(1, 'instructor');
+(2, 'student');
 
 -- --------------------------------------------------------
 
@@ -184,7 +175,7 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`sec_id`, `sec_name`) VALUES
-(1, '3A');
+(3, '3a');
 
 -- --------------------------------------------------------
 
@@ -204,19 +195,39 @@ CREATE TABLE `tools` (
 --
 
 INSERT INTO `tools` (`tool_id`, `toolname`, `price`, `quantity`) VALUES
-(1, 'crimper', '100.00', '9');
+(4, 'crimper', '100.00', '-1'),
+(5, 'led', '90.00', '5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `transaction_id` int(11) NOT NULL,
+  `borrower` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `returned` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`transaction_id`, `borrower`, `time`, `returned`) VALUES
+(1, 615100, '2019-04-01 14:46:39', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `borrow`
+-- Indexes for table `borrowed_tools`
 --
-ALTER TABLE `borrow`
-  ADD PRIMARY KEY (`borrow_id`),
-  ADD KEY `borrower` (`borrower`),
-  ADD KEY `tools` (`tools`);
+ALTER TABLE `borrowed_tools`
+  ADD KEY `tools` (`tools`),
+  ADD KEY `transaction_id` (`transaction_id`);
 
 --
 -- Indexes for table `borrower`
@@ -273,20 +284,21 @@ ALTER TABLE `tools`
   ADD PRIMARY KEY (`tool_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `transaction`
 --
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `borrower` (`borrower`);
 
 --
--- AUTO_INCREMENT for table `borrow`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `borrow`
-  MODIFY `borrow_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -298,7 +310,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `penalties`
 --
 ALTER TABLE `penalties`
-  MODIFY `pen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penalty`
@@ -310,46 +322,42 @@ ALTER TABLE `penalty`
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `pos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `borrow`
+-- Constraints for table `borrowed_tools`
 --
-ALTER TABLE `borrow`
-  ADD CONSTRAINT `borrow_ibfk_1` FOREIGN KEY (`borrower`) REFERENCES `borrower` (`stud_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `borrow_ibfk_2` FOREIGN KEY (`tools`) REFERENCES `tools` (`tool_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `borrowed_tools`
+  ADD CONSTRAINT `borrowed_tools_ibfk_1` FOREIGN KEY (`tools`) REFERENCES `tools` (`tool_id`),
+  ADD CONSTRAINT `borrowed_tools_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`);
 
 --
--- Constraints for table `borrower`
+-- Constraints for table `transaction`
 --
-ALTER TABLE `borrower`
-  ADD CONSTRAINT `borrower_ibfk_2` FOREIGN KEY (`department`) REFERENCES `department` (`dept_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `borrower_ibfk_3` FOREIGN KEY (`section`) REFERENCES `section` (`sec_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `borrower_ibfk_4` FOREIGN KEY (`position`) REFERENCES `position` (`pos_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `penalty`
---
-ALTER TABLE `penalty`
-  ADD CONSTRAINT `penalty_ibfk_1` FOREIGN KEY (`borrower`) REFERENCES `borrower` (`stud_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `penalty_ibfk_2` FOREIGN KEY (`tools`) REFERENCES `tools` (`tool_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `penalty_ibfk_4` FOREIGN KEY (`penalty`) REFERENCES `penalties` (`pen_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`borrower`) REFERENCES `borrower` (`stud_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

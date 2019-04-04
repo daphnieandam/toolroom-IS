@@ -95,7 +95,7 @@ include_once("connection.php");
         <h5 class="card-title" style="font-family:Times New Roman;">Borrowed Tools</h5>
         <p class="card-text" style="color: #ffc107;">
 		<?php
-		$result = mysqli_query($db, "SELECT * FROM borrow,tools WHERE borrow.tools=tools.tool_id");
+		$result = mysqli_query($db, "SELECT * FROM borrowed_tools,tools WHERE borrowed_tools.tools=tools.tool_id");
 		?>
 		<?php while($res = mysqli_fetch_array($result)) {	
 			echo $res['toolname']."</br>";
@@ -110,7 +110,7 @@ include_once("connection.php");
         <h5 class="card-title" style="font-family:Times New Roman;">List of All Borrowers</h5>
         <p class="card-text" style="color: #ffc107;">
 		<?php
-		$result = mysqli_query($db, "SELECT * FROM borrow,borrower WHERE borrow.borrower=borrower.stud_id");
+		$result = mysqli_query($db, "SELECT * FROM transaction,borrower WHERE transaction.borrower=borrower.stud_id");
 		?>
 		
 		<?php while($res = mysqli_fetch_array($result)) {	

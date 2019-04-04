@@ -92,16 +92,15 @@ $result = mysqli_query($db, "SELECT * FROM login ORDER BY id DESC");
 <br/>
 	<div class="container" style="font-family:Times New Roman;">
 		<div class="card text-white" style="width: 100%">
-		<div class="card-header" style="background-color:  #CC7722;"><?php while($res = mysqli_fetch_array($result)) {	
+		<div class="card-header" style="background-color:  #CC7722;"><h3><?php while($res = mysqli_fetch_array($result)) {	
 			echo $res['username'];
-		?></div>
+		?></h3></div>
   <div class="card-body" style="background-color:  #CC7722;">
 	<h3>
     <?php
 			echo "Name: ".$res['lastname'].", ".$res['firstname']."</br>";
 			echo "Email: ".$res['email']."</br>";
 			echo "Username: ".$res['username']."</br>";
-			echo "Passwords: (encrypted)".$res['password']."</br></br>";
 			echo "<a href=\"profile.php?id=$res[id]\">Edit</a>";		
 		}
 		?></h3>

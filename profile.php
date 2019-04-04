@@ -17,9 +17,8 @@ if(isset($_POST['update'])) {
 	$lastname = $_POST['lastname'];
 	$email = $_POST['email'];
 	$username = $_POST['username'];
-	$password = $_POST['password'];
 	
-	$result = mysqli_query($db, "UPDATE login SET firstname='$firstname', lastname='$lastname', email='$email', username='$username', password='$password' WHERE id=$id");
+	$result = mysqli_query($db, "UPDATE login SET firstname='$firstname', lastname='$lastname', email='$email', username='$username' WHERE id=$id");
 		
 		header("Location: admin.php");
 }
@@ -36,7 +35,6 @@ while($res = mysqli_fetch_array($result)) {
 	$lastname = $res['lastname'];
 	$email = $res['email'];
 	$username = $res['username'];
-	$password = $res['password'];
 	}
 ?>
 <!DOCTYPE html>
@@ -143,12 +141,6 @@ while($res = mysqli_fetch_array($result)) {
 				<label for="colFormLabel" class="col-sm-2 col-form-label">username</label>
 					<div class="col-sm-5">
 						<input type="text" name="username" value="<?php echo $username;?>" class="form-control" id="colFormLabel">
-					</div>
-			</div>
-			<div class="form-group row">
-				<label for="colFormLabel" class="col-sm-2 col-form-label">password</label>
-					<div class="col-sm-5">
-						<input type="password" name="password" value="<?php echo $password;?>" class="form-control" id="colFormLabel">
 					</div>
 			</div>
 			<div class="form-group row">

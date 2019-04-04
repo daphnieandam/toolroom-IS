@@ -12,25 +12,25 @@ include_once("connection.php");
 
 if(isset($_POST['update']))
 {	
-	$borrow_id = $_POST['borrow_id'];
+	$transaction_id = $_POST['transaction_id'];
 	$returned = $_POST['returned'];
 	
-	$result = mysqli_query($db, "UPDATE borrow SET returned='$returned' WHERE borrow_id=$borrow_id");
+	$result = mysqli_query($db, "UPDATE transaction SET returned='$returned' WHERE transaction_id = '$transaction_id");
 		
 		header("Location: borrowerview.php");
 }
 ?>
 <?php
-$borrow_id = $_GET['borrow_id'];
+$transaction_id = $_GET['transaction_id'];
 
-$result = mysqli_query($db, "SELECT * FROM borrow,borrower,tools WHERE borrow.borrower=borrower.stud_id AND borrow.tools=tools.tool_id AND borrow_id=$borrow_id");
+$result = mysqli_query($db, "select transaction.transaction_id,borrower.firstname,borrower.lastname,tools.toolname,sum(borrowed_tools.quantity),transaction.time,transaction.returned from transaction,borrowed_tools,borrower,tools WHERE transaction.borrower = borrower.stud_id AND transaction.transaction_id=borrowed_tools.transaction_id AND borrowed_tools.tools = tools.tool_id GROUP BY transaction.transaction_id");
 
 while($res = mysqli_fetch_array($result)) {
 	$time = $res['time'];
 	$borrower = $res['lastname'];
 	$borrower1 = $res['firstname'];
 	$tools = $res['toolname'];
-	$qty = $res['qty'];
+	$quantity = $res['sum(borrowed_tools.quantity)'];
 	$returned = $res['returned'];
 	}
 ?>
@@ -105,6 +105,7 @@ while($res = mysqli_fetch_array($result)) {
 	</nav>
 <br/>
 	<div class="container">
+		
 		<nav aria-label="breadcrumb" role="navigation">
 			<div class="col-sm-5">
 				<ol class="breadcrumb">
@@ -137,7 +138,7 @@ while($res = mysqli_fetch_array($result)) {
 			<div class="form-group row">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">quantity</label>
 					<div class="col-sm-5">
-						<input type="number" name="qty" value="<?php echo $qty;?>" class="form-control" id="colFormLabel">
+						<input type="number" name="quantity" value="<?php echo $quantity;?>" class="form-control" id="colFormLabel">
 					</div>
 			</div>
 			<div class="form-group row">
@@ -146,7 +147,7 @@ while($res = mysqli_fetch_array($result)) {
 						<input type="date" name="returned" class="form-control" id="colFormLabel" value="<?php echo $returned;?>"/>
 					</div>
 					<div class="col-sm-5">
-						<input type="hidden" name="borrow_id" value=<?php echo $_GET['borrow_id'];?>>
+						<input type="hidden" name="transaction_id" value=<?php echo $_GET['transaction_id'];?>>
 							<button class="btn btn-outline-success" type="submit" name="update" value="Update">update</button>
 					</div>
 			</div>

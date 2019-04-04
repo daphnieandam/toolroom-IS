@@ -9,7 +9,10 @@ if(!isset($_SESSION['valid'])) {
 <?php	
 include_once("connection.php");
 
-$result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.tools = tools.tool_id AND borrow.borrower = borrower.stud_id");
+$result = mysqli_query($db, "SELECT *
+FROM transaction,borrowed_tools, tools, borrower
+WHERE transaction.borrower = borrower.stud_id AND transaction.transaction_id = borrowed_tools.transaction_id 
+AND tools.tool_id = borrowed_tools.tools");
 ?>
 
 <!DOCTYPE html>
@@ -97,27 +100,25 @@ $result = mysqli_query($db, "SELECT * FROM borrow,tools,borrower WHERE borrow.to
 		</nav>
 <br/>
 	<div class="container">
+	
 		<table class="table">
 			<tr bgcolor='#CC7722'>
 			<td>Student / Instructor</td>
 			<td>Borrowed tools</td>
-			<td>quantity</td>
-			<td>Time Borrowed</td>
-			<td>Time Returned</td>
-			<td>action</td>
+			<td>date Borrowed</td>
+			<td>date Returned</td>
+			<td>action</td> 
 		</tr>
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
 			echo '<tr style="color: #ffc107;">';
 			echo "<td>".$res['lastname'].", ".$res['firstname']."</td>";
 			echo "<td>".$res['toolname']."</td>";
-			echo "<td>".$res['qty']."</td>";
 			echo "<td>".$res['time']."</td>";
 			echo "<td>".$res['returned']."</td>";
-			echo "<td><a href=\"borrowedit.php?borrow_id=$res[borrow_id]\">details</a> | <a href=\"borrowdelete.php?borrow_id=$res[borrow_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
+			echo "<td><a href=\"borrowedit.php?transaction_id=$res[transaction_id]\">details</a> | <a href=\"borrowdelete.php?transaction_id=$res[transaction_id]\" onClick=\"return confirm('delete ?')\">Delete</a></td>";		
 		}
 		?>
-		
   <tbody>
 </table>
 </div>

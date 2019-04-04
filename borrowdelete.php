@@ -11,10 +11,8 @@ if(!isset($_SESSION['valid'])) {
 include("connection.php");
 
 
-$borrow_id = $_GET['borrow_id'];
-
-
-$result=mysqli_query($db, "DELETE FROM borrow WHERE borrow_id=$borrow_id");
+$transaction_id = $_GET['transaction_id'];
+$result=mysqli_query($db, "DELETE FROM `transaction` WHERE `transaction_id` = $transaction_id;");
 
 header("Location: borrowerview.php");
 ?>

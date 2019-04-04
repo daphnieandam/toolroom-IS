@@ -97,6 +97,7 @@ if(!isset($_SESSION['valid'])) {
     <div class="card text-center" style="background-color: #CC7722;">
       <div class="card-body">
         <h4 class="card-title">Brrowers</h4>
+		<img src="img/111.jpg" width="100" height="80" style="border-radius: 20%"/></br></br>
         <a class="btn btn-sm btn-outline-warning" href="add.php">add</a>
       </div>
     </div>
