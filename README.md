@@ -1,3 +1,3 @@
 # toolroom-IS
 
-A toolroom is a room where tools are stored.
+A toolroom is where tools are stored.
